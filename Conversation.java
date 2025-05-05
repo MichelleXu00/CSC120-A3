@@ -5,7 +5,7 @@ import java.util.Scanner;
 class Conversation implements Chatbot {
 
   // Attributes 
-  int numrounds;
+  int numRounds;
   String inputString;
   String response;
   String randomResponse;
@@ -32,12 +32,12 @@ class Conversation implements Chatbot {
     
     //get number of rounds
     Scanner input = new Scanner(System.in);
-    int numrounds = input.nextInt();
+    int numRounds = input.nextInt();
     input.nextLine();
     System.out.println("Hi there! What's on your mind?");
     
     //start the conversation
-    for (int i = 0; i < numrounds; i++) {
+    for (int i = 0; i < numRounds; i++) {
       String inputString = input.nextLine();
       System.out.println(respond(inputString));
     }
@@ -53,10 +53,12 @@ class Conversation implements Chatbot {
    */
   public void printTranscript() {
     transcript.add(intro);
-    transcript.add(Integer.toString(numrounds));
-    //transcript.add(inputString);
-    //transcript.add(respond(inputString));
-    System.out.println(transcript);
+    transcript.add(Integer.toString(numRounds));
+    transcript.add(inputString);
+    transcript.add(respond(inputString));
+    for (String line:transcript) {
+      System.out.println(line);
+    }
   }
 
   /**
@@ -65,6 +67,9 @@ class Conversation implements Chatbot {
    * @return mirrored or canned response to user input  
    */
   public String respond(String inputString) {
+    if (inputString == null) {
+      throw new RuntimeException("inputString is null -- no response generated");
+    }
     ArrayList<String> rResponse = new ArrayList<>();
     rResponse.add("Mmm-hm");
     rResponse.add("I don't know");
