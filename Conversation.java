@@ -11,7 +11,7 @@ class Conversation implements Chatbot {
   String randomResponse;
   String [] words;
   ArrayList<String> transcript;
-  String intro;
+
   /**
    * Constructor 
    */
@@ -26,23 +26,31 @@ class Conversation implements Chatbot {
   public void chat() {
 
     // Print welcome and ask for the number of rounds
-    intro = "Welcome to Java Conversation!\nHow many rounds?";
+    String intro = "Welcome to Java Conversation!\nHow many rounds?";
+    transcript.add(intro);
     System.out.println(intro);
 
     
     //get number of rounds
     Scanner input = new Scanner(System.in);
     int numRounds = input.nextInt();
+    transcript.add(Integer.toString(numRounds));
     input.nextLine();
-    System.out.println("Hi there! What's on your mind?");
+    String greet = "Hi there! What's on your mind?";
+    transcript.add(greet);
+    System.out.println(greet);
     
     //start the conversation
     for (int i = 0; i < numRounds; i++) {
       String inputString = input.nextLine();
+      transcript.add(inputString);
       System.out.println(respond(inputString));
     }
 
-    System.out.println("See ya!");
+    //end the conversation
+    String farewell = "See ya!";
+    transcript.add(farewell);
+    System.out.println(farewell);
     input.close();
     }
     
@@ -52,10 +60,6 @@ class Conversation implements Chatbot {
    * Prints transcript of conversation
    */
   public void printTranscript() {
-    transcript.add(intro);
-    transcript.add(Integer.toString(numRounds));
-    transcript.add(inputString);
-    transcript.add(respond(inputString));
     for (String line:transcript) {
       System.out.println(line);
     }
@@ -108,7 +112,7 @@ class Conversation implements Chatbot {
     } if (!hasMirror) {
       transcript.add(randomResponse);
       return randomResponse;
-    } transcript.add(response);
+    } transcript.add(response.strip());
     return response.strip();
   }
   
